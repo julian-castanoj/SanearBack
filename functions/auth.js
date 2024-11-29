@@ -1,12 +1,8 @@
 const express = require('express');
-const serverless = require('serverless-http');
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { getSheetData } = require('./sheets');
 
-const app = express();
 const router = express.Router();
-
-app.use(express.json());
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -38,6 +34,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-app.use('/.netlify/functions/auth', router);
-
-module.exports.handler = serverless(app);
+module.exports = router;

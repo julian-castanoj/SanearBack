@@ -2,22 +2,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const authRoutes = require('./functions/auth'); // Rutas de autenticación
 
-// Configuración de variables de entorno
-dotenv.config();
+dotenv.config(); // Carga variables de entorno desde .env
 
 const app = express();
-const authRoutes = require('./routes/auth');
 
 // Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 // Rutas
 app.use('/api/auth', authRoutes);
 
-// Inicio del servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+// Configuración para local o producción
+if (process.env.NODE_ENV === 'development') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Servidor local corriendo en http://localhost:${PORT}`);
+  });
+} else {
+  const serverless = require('serverless-http');
+  module.exports.handler = serverless(app); // Exporta como función para Netlify
+}

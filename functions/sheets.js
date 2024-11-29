@@ -2,7 +2,7 @@ const { google } = require('googleapis');
 
 const authenticateGoogle = () => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY, // Cargar desde variable de entorno
+    keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY, // Ruta del archivo JSON de la cuenta de servicio
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
   return auth;
