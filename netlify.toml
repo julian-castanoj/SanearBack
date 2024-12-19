@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build"  # O el comando adecuado para tu backend
-  publish = "public"  # La carpeta donde se publican los archivos listos para producción
+  command = "npm run build"  # Ejecutará el comando npm run build, que en tu caso solo imprimirá un mensaje
+  publish = "."  # Publica el directorio raíz (asegúrate de que tu backend esté allí)
 
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
