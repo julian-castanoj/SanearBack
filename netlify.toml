@@ -2,8 +2,7 @@
   command = "npm run build"  # O el comando adecuado para tu backend
   publish = "public"  # La carpeta donde se publican los archivos listos para producción
 
-[plugins]
-  [[plugins]]
+[[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
 [[redirects]]
@@ -11,3 +10,4 @@
   to = "https://:splat"
   status = 301
   force = true
+
