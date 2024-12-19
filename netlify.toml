@@ -1,31 +1,26 @@
-# Define el comando de construcción
 [build]
-  command = "npm run build"  # Comando que se ejecuta para construir la aplicación
-  publish = "public"  # Directorio donde se publicarán los archivos listos para producción (ajustado según sea necesario)
+  command = "npm run build"  # Comando que ejecuta la construcción
+  publish = "dist/tu-nombre-del-proyecto"  # Cambia a tu carpeta de salida de construcción, generalmente `dist/<nombre-del-proyecto>`
 
-# Instalación de funciones de Netlify (para backend con funciones serverless)
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
-# Redirecciones desde http://* hacia https://*
 [[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301
   force = true
 
-# Configuración de los headers para permitir CORS
 [[headers]]
-  for = "/api/*"  # Aquí defines el patrón de tus funciones backend
+  for = "/api/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 
 [[headers]]
-  for = "/.netlify/functions/login"  # Esta es la ruta de tu función serverless (ajústalo si es necesario)
+  for = "/.netlify/functions/login"
   [headers.values]
-    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permitir solicitudes desde este dominio
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos permitidos
+    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
-
