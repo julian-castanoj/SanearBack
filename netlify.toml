@@ -1,26 +1,26 @@
 [build]
-  command = "npm run build"  # Comando que ejecuta la construcción
-  publish = "dist/tu-nombre-del-proyecto"  # Cambia a tu carpeta de salida de construcción, generalmente `dist/<nombre-del-proyecto>`
+  command = "npm run build --prod"  # Comando para construir la aplicación en modo producción
+  publish = "dist/sanear-encargado"  # Directorio de salida generado por Angular
 
 [[plugins]]
-  package = "@netlify/plugin-functions-install-core"
+  package = "@netlify/plugin-functions-install-core"  # Plugin para instalar funciones serverless si es necesario
 
 [[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301
-  force = true
+  force = true  # Redirección de HTTP a HTTPS
 
 [[headers]]
-  for = "/api/*"
+  for = "/api/*"  # Aplica a las rutas que comienzan con /api/
   [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Origin = "*"  # Permite todas las solicitudes
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"  # Métodos HTTP permitidos
+    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
 
 [[headers]]
-  for = "/.netlify/functions/login"
+  for = "/.netlify/functions/login"  # Ajusta la ruta de la función si es necesario
   [headers.values]
-    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permite solicitudes desde tu dominio
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos HTTP permitidos
+    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
