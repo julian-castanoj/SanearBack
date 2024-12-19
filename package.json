@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node app.js",  
+    "build": "echo 'No build step required'"  
+  },
   "dependencies": {
     "axios": "^1.7.9",
     "cors": "^2.8.5",
@@ -7,9 +11,5 @@
     "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.9"
-  },
-  "scripts": {
-    "start": "node app.js", 
-    "build": "echo 'No build step required'" 
   }
 }
