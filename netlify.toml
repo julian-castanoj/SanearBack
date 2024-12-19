@@ -1,7 +1,7 @@
 # Configuración de la construcción del proyecto
 [build]
-  command = "npm run build"  # Comando para construir el proyecto (ajustado según tu proyecto)
-  publish = "public"  # Directorio de publicación (ajustar si es necesario)
+  command = "npm run build --prod"  # Comando para construir el proyecto en modo producción
+  publish = "dist/sanear-encargado"  # Directorio donde Angular coloca los archivos generados después de la construcción
 
 # Configuración de los encabezados para CORS
 [[headers]]
