@@ -2,7 +2,7 @@
 [build]
   command = "npm run build"  # Comando para construir el proyecto (ajustado según tu proyecto)
   publish = "public"  # Directorio de publicación (ajustar si es necesario)
-  
+
 # Configuración de los encabezados para CORS
 [[headers]]
   for = "/api/*"  # Aplica para las rutas de las funciones backend
@@ -21,7 +21,10 @@
 # Configuración para las funciones serverless de Netlify
 [functions]
   directory = "netlify/functions"  # Directorio donde se encuentran las funciones serverless
-  timeout = 10  # Timeout para las funciones (10 segundos)
+
+  # Timeout de las funciones (especificar para cada función)
+  [functions."*"]
+    timeout = 10  # Timeout para las funciones (10 segundos)
 
 # Redirección para la función de login (ajustar según las rutas de tus funciones)
 [[headers]]
@@ -40,7 +43,7 @@
   PORT = "3000"
   NODE_ENV = "development"
   # Nota: GOOGLE_SERVICE_ACCOUNT_KEY debería configurarse en el panel de Netlify como una variable de entorno
-  GOOGLE_SERVICE_ACCOUNT_KEY = "C:/Users/practica.acueducto/Desktop/Sanear-Back/ringed-valor-426916-s8-9aa11a6e5dc8.json"
+   GOOGLE_SERVICE_ACCOUNT_KEY = "C:/Users/practica.acueducto/Desktop/Sanear-Back/ringed-valor-426916-s8-9aa11a6e5dc8.json"
 
 # Redirección para funciones de autenticación (si usas JWT o autenticación similar)
 [[redirects]]
