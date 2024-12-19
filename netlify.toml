@@ -34,17 +34,6 @@
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos permitidos
     Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
 
-# Configuración de variables de entorno
-[build.environment]
-  GOOGLE_CLIENT_ID = "110122487794769935866"
-  GOOGLE_SHEET_ID = "1pxeO7euWaGIvbE2wZfcc4R95X4gyuZR7a3s6ya-KVEk"
-  JWT_SECRET = "mi_secreto_super_seguro"
-  JWT_EXPIRES_IN = "1h"
-  PORT = "3000"
-  NODE_ENV = "development"
-  # Nota: GOOGLE_SERVICE_ACCOUNT_KEY debería configurarse en el panel de Netlify como una variable de entorno
-   GOOGLE_SERVICE_ACCOUNT_KEY = "C:/Users/practica.acueducto/Desktop/Sanear-Back/ringed-valor-426916-s8-9aa11a6e5dc8.json"
-
 # Redirección para funciones de autenticación (si usas JWT o autenticación similar)
 [[redirects]]
   from = "/auth/*"  # Ruta para las funciones de autenticación
