@@ -1,20 +1,12 @@
-# Configuración de Netlify para un proyecto que utiliza Docker
 [build]
-  # El comando para construir tu contenedor Docker
-  command = "docker build -t my-backend . && docker run -p 3000:3000 my-backend"
-  # Directorio de publicación (aunque no se usa en este caso si solo tienes una API)
-  publish = "public"
+  command = "npm run build"
+  publish = "public"  # Si es necesario, ajusta esto según el directorio de salida de tu aplicación
 
-# Configuración para el entorno de producción
-[context.production.environment]
-  NODE_ENV = "production"
-
-# Si tienes funciones de Netlify (opcional, si usas Netlify Functions)
-[[plugins]]
+[plugins]
+  [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
 [[redirects]]
-  # Ejemplo de redirección: redirigir todas las solicitudes HTTP a HTTPS
   from = "http://*"
   to = "https://:splat"
   status = 301
