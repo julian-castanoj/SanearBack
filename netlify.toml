@@ -19,14 +19,8 @@
   force = true
 
 # Configuración para las funciones serverless de Netlify
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"  # Instala el core de funciones de Netlify
-
-# Configuración de las funciones específicas
-[[functions]]
+[functions]
   directory = "netlify/functions"  # Directorio donde se encuentran las funciones serverless
-  
-  # Configuración de timeout para funciones (ajustado según tu necesidad)
   timeout = 10  # Timeout para las funciones (10 segundos)
 
 # Redirección para la función de login (ajustar según las rutas de tus funciones)
@@ -46,7 +40,7 @@
   PORT = "3000"
   NODE_ENV = "development"
   # Nota: GOOGLE_SERVICE_ACCOUNT_KEY debería configurarse en el panel de Netlify como una variable de entorno
-  GOOGLE_SERVICE_ACCOUNT_KEY = "<Contenido_del_archivo_JSON>"  # Este valor debe ser el contenido completo del archivo JSON en formato de cadena de texto
+  GOOGLE_SERVICE_ACCOUNT_KEY = "C:/Users/practica.acueducto/Desktop/Sanear-Back/ringed-valor-426916-s8-9aa11a6e5dc8.json"
 
 # Redirección para funciones de autenticación (si usas JWT o autenticación similar)
 [[redirects]]
