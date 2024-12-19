@@ -64,7 +64,7 @@ async function fetchSheetData(range) {
 }
 
 // Login Route
-app.post('/login', async (req, res) => {
+app.post('/login', cors(corsOptions), (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
