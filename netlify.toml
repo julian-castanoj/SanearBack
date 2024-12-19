@@ -1,15 +1,17 @@
 [build]
-  # Si no tienes un paso de construcción como en un frontend, solo instala las dependencias
-  command = "npm install"  # Solo instalar dependencias de Node.js
+  # Solo instala dependencias, no necesitas un paso de construcción como en un frontend
+  command = "npm install"
   publish = "netlify/functions"  # Netlify buscará las funciones dentro de este directorio
   
 [functions]
-  directory = "netlify/functions"  # Este es el directorio donde Netlify buscará las funciones serverless
-  # Opcional: Si tienes dependencias adicionales en tus funciones, puedes especificarlas aquí
-  external_node_modules = ["googleapis", "jsonwebtoken"]  # Ejemplo: si usas estas dependencias en las funciones
+  directory = "netlify/functions"  # Directorio de funciones serverless
   
-  # Timeout para las funciones (si es necesario)
-  timeout = 10  # Ajustar el tiempo de espera si es necesario para las funciones
+  # Configuración del timeout para las funciones (si lo necesitas)
+  [functions.timeout]
+  seconds = 10  # Tiempo de espera para las funciones
+
+  # Opcional: si tienes dependencias adicionales en tus funciones, puedes especificarlas aquí
+  external_node_modules = ["googleapis", "jsonwebtoken"]  # Si usas estas dependencias en las funciones
 
 # Configuración de los encabezados para CORS (si es necesario)
 [[headers]]
