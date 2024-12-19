@@ -1,26 +1,55 @@
+# Configuración de la construcción del proyecto
 [build]
-  command = "npm run build --prod"  # Comando para construir la aplicación en modo producción
-  publish = "dist/sanear-encargado"  # Directorio de salida generado por Angular
+  command = "npm run build"  # Comando para construir el proyecto (ajustado según tu proyecto)
+  publish = "public"  # Directorio de publicación (ajustar si es necesario)
+  
+# Configuración de los encabezados para CORS
+[[headers]]
+  for = "/api/*"  # Aplica para las rutas de las funciones backend
+  [headers.values]
+    Access-Control-Allow-Origin = "*"  # Permite solicitudes desde cualquier dominio
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"  # Métodos permitidos
+    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
 
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"  # Plugin para instalar funciones serverless si es necesario
-
+# Redirecciones desde HTTP a HTTPS
 [[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301
-  force = true  # Redirección de HTTP a HTTPS
+  force = true
 
+# Configuración para las funciones serverless de Netlify
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"  # Instala el core de funciones de Netlify
+
+# Configuración de las funciones específicas
+[[functions]]
+  directory = "netlify/functions"  # Directorio donde se encuentran las funciones serverless
+  
+  # Configuración de timeout para funciones (ajustado según tu necesidad)
+  timeout = 10  # Timeout para las funciones (10 segundos)
+
+# Redirección para la función de login (ajustar según las rutas de tus funciones)
 [[headers]]
-  for = "/api/*"  # Aplica a las rutas que comienzan con /api/
+  for = "/.netlify/functions/login"  # Ruta de la función de login
   [headers.values]
-    Access-Control-Allow-Origin = "*"  # Permite todas las solicitudes
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"  # Métodos HTTP permitidos
+    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permite solicitudes desde este dominio
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos permitidos
     Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
 
-[[headers]]
-  for = "/.netlify/functions/login"  # Ajusta la ruta de la función si es necesario
-  [headers.values]
-    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permite solicitudes desde tu dominio
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos HTTP permitidos
-    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
+# Configuración de variables de entorno
+[build.environment]
+  GOOGLE_CLIENT_ID = "110122487794769935866"
+  GOOGLE_SHEET_ID = "1pxeO7euWaGIvbE2wZfcc4R95X4gyuZR7a3s6ya-KVEk"
+  JWT_SECRET = "mi_secreto_super_seguro"
+  JWT_EXPIRES_IN = "1h"
+  PORT = "3000"
+  NODE_ENV = "development"
+  # Nota: GOOGLE_SERVICE_ACCOUNT_KEY debería configurarse en el panel de Netlify como una variable de entorno
+  GOOGLE_SERVICE_ACCOUNT_KEY = "<Contenido_del_archivo_JSON>"  # Este valor debe ser el contenido completo del archivo JSON en formato de cadena de texto
+
+# Redirección para funciones de autenticación (si usas JWT o autenticación similar)
+[[redirects]]
+  from = "/auth/*"  # Ruta para las funciones de autenticación
+  to = "/.netlify/functions/auth/:splat"  # Ruta donde se encuentran las funciones de autenticación
+  status = 200
