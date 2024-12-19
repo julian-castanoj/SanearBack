@@ -1,14 +1,32 @@
+# Define el comando de construcción
 [build]
-  command = "npm run build"  # Ejecutará el comando npm run build
-  publish = "."  # Publica el directorio raíz
+  command = "npm run build"  # Comando que se ejecuta para construir la aplicación
+  publish = "public"  # Directorio donde se publicarán los archivos listos para producción (ajustado según sea necesario)
 
+# Instalación de funciones de Netlify (para backend con funciones serverless)
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
+# Redirecciones desde http://* hacia https://*
 [[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301
   force = true
 
+# Configuración de los headers para permitir CORS
+[[headers]]
+  for = "/api/*"  # Aquí defines el patrón de tus funciones backend
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+# Configuración de la función de login (ajustar según sea necesario)
+[[headers]]
+  for = "/login"  # Especifica las rutas de la API donde deseas permitir CORS
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
 
