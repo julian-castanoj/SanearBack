@@ -22,11 +22,10 @@
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 
-# Configuración de la función de login (ajustar según sea necesario)
 [[headers]]
-  for = "/login"  # Especifica las rutas de la API donde deseas permitir CORS
+  for = "/.netlify/functions/login"  # Esta es la ruta de tu función serverless (ajústalo si es necesario)
   [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permitir solicitudes desde este dominio
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos permitidos
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 

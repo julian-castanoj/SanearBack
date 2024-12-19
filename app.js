@@ -11,11 +11,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-const corsOptions = {
-  origin: 'https://test-sanear.netlify.app',  // El dominio de tu frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Cabeceras permitidas
-};
+app.use(cors({
+  origin: 'https://test-sanear.netlify.app', // Permitir solo este dominio
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+}));
+
 
 app.use(cors(corsOptions));  // Usar CORS con las opciones definidas
 
@@ -64,7 +65,7 @@ async function fetchSheetData(range) {
 }
 
 // Login Route
-app.post('/login', cors(corsOptions), async (req, res) => { // Add 'async' here
+app.post('/login',  async (req, res) => { // Add 'async' here
   const { username, password } = req.body;
 
   if (!username || !password) {
