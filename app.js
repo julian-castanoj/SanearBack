@@ -64,7 +64,7 @@ async function fetchSheetData(range) {
 }
 
 // Login Route
-app.post('/login', cors(corsOptions), (req, res) => {
+app.post('/login', cors(corsOptions), async (req, res) => { // Add 'async' here
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -72,7 +72,7 @@ app.post('/login', cors(corsOptions), (req, res) => {
   }
 
   try {
-    const users = await fetchSheetData('festivos'); // Usamos la hoja 'festivos' para el login
+    const users = await fetchSheetData('festivos'); // This will now work
     const user = users.find(
       u => u['USUARIOS']?.trim() === username && u['CONTRASEÑAS']?.trim() === password
     );
