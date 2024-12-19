@@ -10,6 +10,15 @@ const sheetsRoutes = require('./routes/sheets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+const corsOptions = {
+  origin: 'https://test-sanear.netlify.app',  // El dominio de tu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Cabeceras permitidas
+};
+
+app.use(cors(corsOptions));  // Usar CORS con las opciones definidas
+
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
@@ -495,6 +504,7 @@ app.get('/api/data/driver-dropdown', async (req, res) => {
   }
 });
 
+app.options('*', cors(corsOptions));
 
 // Start Server
 app.listen(PORT, () => {
