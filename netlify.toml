@@ -1,7 +1,6 @@
 [build]
-  # Solo instalamos dependencias, no hay comando de construcción de frontend
-  command = "npm install"
-  publish = "/opt/build/repo"  # Solo necesitamos esto para que Netlify reconozca el repo, no es necesario para un backend puro.
+  command = "npm run build"  # Ejecutará el comando npm run build
+  publish = "."  # Publica el directorio raíz
 
 [functions]
   # Directorio donde se encuentran tus funciones de backend
@@ -32,3 +31,5 @@
   to = "https://:splat"
   status = 301
   force = true
+
+
