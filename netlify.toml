@@ -1,41 +1,25 @@
-# Configuración de la construcción del proyecto
 [build]
-  command = "npm run build --prod"  # Comando para construir el proyecto en modo producción
-  publish = "dist/sanear-encargado"  # Directorio donde Angular coloca los archivos generados después de la construcción
+  command = "npm install && npm run build"  # Asegúrate de tener un script de build si es necesario
+  publish = "dist"  # El directorio para la salida (si existe uno)
 
-# Configuración de los encabezados para CORS
-[[headers]]
-  for = "/api/*"  # Aplica para las rutas de las funciones backend
-  [headers.values]
-    Access-Control-Allow-Origin = "*"  # Permite solicitudes desde cualquier dominio
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"  # Métodos permitidos
-    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
-
-# Redirecciones desde HTTP a HTTPS
-[[redirects]]
-  from = "http://*"
-  to = "https://:splat"
-  status = 301
-  force = true
-
-# Configuración para las funciones serverless de Netlify
+# Directorio de funciones (si las funciones de Netlify están en netlify/functions)
 [functions]
-  directory = "netlify/functions"  # Directorio donde se encuentran las funciones serverless
+  directory = "netlify/functions"
 
-  # Timeout de las funciones (especificar para cada función)
-  [functions."*"]
-    timeout = 10  # Timeout para las funciones (10 segundos)
+# Configuración de funciones de tiempo de espera
+[functions."*"]
+  timeout = 10
 
-# Redirección para la función de login (ajustar según las rutas de tus funciones)
+# Configuración de encabezados CORS
 [[headers]]
-  for = "/.netlify/functions/login"  # Ruta de la función de login
+  for = "/api/*"
   [headers.values]
-    Access-Control-Allow-Origin = "https://test-sanear.netlify.app"  # Permite solicitudes desde este dominio
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE"  # Métodos permitidos
-    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Origin = "*"
 
-# Redirección para funciones de autenticación (si usas JWT o autenticación similar)
+# Redirecciones si es necesario
 [[redirects]]
-  from = "/auth/*"  # Ruta para las funciones de autenticación
-  to = "/.netlify/functions/auth/:splat"  # Ruta donde se encuentran las funciones de autenticación
+  from = "/auth/*"
+  to = "/.netlify/functions/auth/:splat"
   status = 200
