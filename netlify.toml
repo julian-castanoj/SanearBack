@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "public"  # Si es necesario, ajusta esto según el directorio de salida de tu aplicación
+  command = "npm run build"  # O el comando adecuado para tu backend
+  publish = "public"  # La carpeta donde se publican los archivos listos para producción
 
 [plugins]
   [[plugins]]
