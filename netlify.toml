@@ -1,25 +1,31 @@
 [build]
-  command = "npm install && npm run build"  # Asegúrate de tener un script de build si es necesario
-  publish = "dist"  # El directorio para la salida (si existe uno)
-
-# Directorio de funciones (si las funciones de Netlify están en netlify/functions)
+  # Si no tienes un paso de construcción como en un frontend, solo instala las dependencias
+  command = "npm install"  # Solo instalar dependencias de Node.js
+  publish = "netlify/functions"  # Netlify buscará las funciones dentro de este directorio
+  
 [functions]
-  directory = "netlify/functions"
+  directory = "netlify/functions"  # Este es el directorio donde Netlify buscará las funciones serverless
+  # Opcional: Si tienes dependencias adicionales en tus funciones, puedes especificarlas aquí
+  external_node_modules = ["googleapis", "jsonwebtoken"]  # Ejemplo: si usas estas dependencias en las funciones
+  
+  # Timeout para las funciones (si es necesario)
+  timeout = 10  # Ajustar el tiempo de espera si es necesario para las funciones
 
-# Configuración de funciones de tiempo de espera
-[functions."*"]
-  timeout = 10
-
-# Configuración de encabezados CORS
+# Configuración de los encabezados para CORS (si es necesario)
 [[headers]]
-  for = "/api/*"
+  for = "/api/*"  # Aplica para las rutas de las funciones backend
   [headers.values]
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Origin = "*"  # Permite solicitudes desde cualquier dominio
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"  # Métodos permitidos
+    Access-Control-Allow-Headers = "Content-Type, Authorization"  # Encabezados permitidos
 
-# Redirecciones si es necesario
 [[redirects]]
-  from = "/auth/*"
-  to = "/.netlify/functions/auth/:splat"
+  from = "/auth/*"  # Ruta para las funciones de autenticación
+  to = "/.netlify/functions/auth/:splat"  # Ruta de las funciones
   status = 200
+
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
